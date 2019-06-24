@@ -16,13 +16,6 @@
 			"memory": 128
 		},
 		{
-			"name": "client",
-			"image": "mrdr/multi-client",
-			"hostname": "client",
-			"essential": false,
-			"memory": 128
-		},
-		{
 			"name": "worker",
 			"image": "mrdr/multi-worker",
 			"hostname": "worker",
