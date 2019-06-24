@@ -1,0 +1,22 @@
+sudo: required
+services: 
+  - docker
+
+before_install:
+  - docker build -t mrdr/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true mrdr/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t mrdr/multi-client ./client
+  - docker build -t mrdr/multi-nginx ./nginx
+  - docker build -t mrdr/multi-server ./server
+  - docker build -t mrdr/multi-worker ./worker
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  - docker push mrdr/multi-client
+  - docker push mrdr/multi-nginx
+  - docker push mrdr/multi-server
+  - docker push mrdr/multi-worker
