@@ -20,3 +20,16 @@ after_success:
   - docker push mrdr/multi-nginx
   - docker push mrdr/multi-server
   - docker push mrdr/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: ap-southeast-1
+  app: multi-docker
+  env: MultiDocker-env-1
+  bucket_name: elasticbeanstalk-ap-southeast-1-969450302021 
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
