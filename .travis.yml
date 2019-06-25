@@ -16,10 +16,10 @@ after_success:
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  - docker push mrdr/multi-client
-  - docker push mrdr/multi-nginx
   - docker push mrdr/multi-server
   - docker push mrdr/multi-worker
+  - docker push mrdr/multi-client
+  - docker push mrdr/multi-nginx
 
 deploy:
   provider: elasticbeanstalk
